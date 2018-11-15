@@ -70,8 +70,10 @@ public class Main {
 		*/
 		
 		Car car = new Car("Monster Trucks","N",2,3);
-		Simulator simulator = new Simulator(8,6,"FFFRFFLBB");
-		simulator.startSimulation(car);
+		Simulator simulator = new Simulator(8,6,"LFFLFFF");
+		boolean resultado;
+		resultado = simulator.startSimulation(car);
+		System.out.println("Resultado: "+resultado);
 		
 		
 		

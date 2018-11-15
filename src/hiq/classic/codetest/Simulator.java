@@ -12,33 +12,59 @@ public class Simulator {
 	
 	public boolean startSimulation(Car car) {
 		
+		boolean isDrivingIntoTheWall = false;
+		
 		for(int i = 0; i < this.getCommands().length();i++) {
 			char specificCommand = this.commands.charAt(i);
 			
 			if(specificCommand == 'F' && car.getHeading() == "N") {
-				movingForwardHeadingNorth(car);
+				isDrivingIntoTheWall = movingForwardHeadingNorth(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}			
 			else if(specificCommand == 'F' && car.getHeading() == "E") {
-				movingForwardHeadingEast(car);				
+				isDrivingIntoTheWall = movingForwardHeadingEast(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}			
 			else if(specificCommand == 'F' && car.getHeading() == "S") {
-				movingForwardHeadingSouth(car);
+				isDrivingIntoTheWall = movingForwardHeadingSouth(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}			
 			else if(specificCommand == 'F' && car.getHeading() == "W") {
-				movingForwardHeadingWest(car);
+				isDrivingIntoTheWall = movingForwardHeadingWest(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}
 			
 			else if(specificCommand == 'B' && car.getHeading() == "N") {
-				movingBackwardsHeadingNorth(car);
+				isDrivingIntoTheWall = movingBackwardsHeadingNorth(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}
 			else if(specificCommand == 'F' && car.getHeading() == "E") {
-				movingBackwardsHeadingEast(car);				
+				isDrivingIntoTheWall = movingBackwardsHeadingEast(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}			
 			else if(specificCommand == 'F' && car.getHeading() == "S") {
-				movingBackwardsHeadingSouth(car);
+				isDrivingIntoTheWall = movingBackwardsHeadingSouth(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}			
 			else if(specificCommand == 'F' && car.getHeading() == "W") {
-				movingBackwardsHeadingWest(car);
+				isDrivingIntoTheWall = movingBackwardsHeadingWest(car);
+				if(isDrivingIntoTheWall == true) {
+					return false;
+				}
 			}			
 			
 			else if(specificCommand == 'L') {
@@ -55,39 +81,55 @@ public class Simulator {
 			
 		}
 		
-		return false;
+		return true;
 	}
 	
-	public void movingForwardHeadingNorth(Car car) {
+	public boolean movingForwardHeadingNorth(Car car) {
 		car.setCurrentPositionAtY(car.getCurrentPositionAtY() + 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingForwardHeadingEast(Car car) {
+	public boolean movingForwardHeadingEast(Car car) {
 		car.setCurrentPositionAtX(car.getCurrentPositionAtX() + 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingForwardHeadingSouth(Car car) {
-		car.setCurrentPositionAtX(car.getCurrentPositionAtY() - 1);
+	public boolean movingForwardHeadingSouth(Car car) {
+		car.setCurrentPositionAtX(car.getCurrentPositionAtX() - 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingForwardHeadingWest(Car car) {
-		car.setCurrentPositionAtY(car.getCurrentPositionAtX() - 1);
+	public boolean movingForwardHeadingWest(Car car) {
+		car.setCurrentPositionAtX(car.getCurrentPositionAtX() - 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingBackwardsHeadingNorth(Car car) {
+	public boolean movingBackwardsHeadingNorth(Car car) {
 		car.setCurrentPositionAtY(car.getCurrentPositionAtY() - 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingBackwardsHeadingEast(Car car) {
-		car.setCurrentPositionAtY(car.getCurrentPositionAtX() - 1);
+	public boolean movingBackwardsHeadingEast(Car car) {
+		car.setCurrentPositionAtY(car.getCurrentPositionAtY() - 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingBackwardsHeadingSouth(Car car) {
-		car.setCurrentPositionAtX(car.getCurrentPositionAtY() + 1);
+	public boolean movingBackwardsHeadingSouth(Car car) {
+		car.setCurrentPositionAtX(car.getCurrentPositionAtX() + 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
-	public void movingBackwardsHeadingWest(Car car) {
-		car.setCurrentPositionAtY(car.getCurrentPositionAtX() + 1);
+	public boolean movingBackwardsHeadingWest(Car car) {
+		car.setCurrentPositionAtY(car.getCurrentPositionAtY() + 1);
+		return checkIfDroveIntoTheWall(car.getCurrentPositionAtX(),
+				car.getCurrentPositionAtY());
 	}
 	
 	public void rotateLeft(Car car) {
@@ -120,24 +162,17 @@ public class Simulator {
 		}
 	}
 	
-	public void checkIfDroveIntoTheWall(int positionAfterMoveAtX, int positionAfterMoveAtY) {
-		this.getRoom()[positionAfterMoveAtX][positionAfterMoveAtY] = 1;
-		System.out.print("Teste");
+	public boolean checkIfDroveIntoTheWall(int positionAfterMoveAtX, int positionAfterMoveAtY) {
+		
+		if(positionAfterMoveAtX > this.getRoom().length || positionAfterMoveAtX < 0) {
+			return true;
+		}
+		if(positionAfterMoveAtY > this.getRoom()[1].length || positionAfterMoveAtY < 0) {
+			return true;
+		}  
+		
+		return false;	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public int[][] getRoom() {
 		return room;

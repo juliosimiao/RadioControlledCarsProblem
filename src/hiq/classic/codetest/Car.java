@@ -13,7 +13,6 @@ public class Car {
 	Map<String,String> cardinalDirections = new HashMap<String,String>()
 			{{
 				put("N","360");
-				put("N","0");
 				put("S","180");
 				put("E","90");
 				put("W","270");
@@ -35,12 +34,7 @@ public class Car {
 	
 	public String getDegreesFromCardinalDirections(String key) {
 		return this.cardinalDirections.get(key);
-	}
-	
-	
-	
-	
-	
+	}	
 
 	public String getCarModel() {
 		return carModel;
