@@ -7,6 +7,8 @@ public class Car {
 	
 	private String carModel;
 	private String heading;
+	private int lastPositionAtX;
+	private int lastPositionAtY;
 	private int currentPositionAtX;
 	private int currentPositionAtY;
 	
@@ -29,7 +31,9 @@ public class Car {
 		this.carModel = carModel;
 		this.heading = heading;
 		this.currentPositionAtX = currentPositionAtX;
-		this.currentPositionAtY = currentPositionAtY;		
+		this.currentPositionAtY = currentPositionAtY;
+		this.lastPositionAtX = currentPositionAtX;
+		this.lastPositionAtY = currentPositionAtY;
 	}
 	
 	public String getDegreesFromCardinalDirections(String key) {
@@ -74,7 +78,25 @@ public class Car {
 
 	public void setCardinalDirections(Map<String, String> cardinalDirections) {
 		this.cardinalDirections = cardinalDirections;
+	}
+
+	public int getLastPositionAtX() {
+		return lastPositionAtX;
+	}
+
+	public void setLastPositionAtX(int lastPositionAtX) {
+		this.lastPositionAtX = lastPositionAtX;
+	}
+
+	public int getLastPositionAtY() {
+		return lastPositionAtY;
+	}
+
+	public void setLastPositionAtY(int lastPositionAtY) {
+		this.lastPositionAtY = lastPositionAtY;
 	}		
+	
+	
 	
 	
 	

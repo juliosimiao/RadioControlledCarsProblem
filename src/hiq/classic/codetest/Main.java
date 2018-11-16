@@ -12,72 +12,88 @@ public class Main {
 		int initialPositionAtX;
 		int initialPositionAtY;
 		String initialHeading;
-		String commands;
+		String commands = "";
+		Car car = null;
+		boolean incorrectInputSizeRoom = true;
+		boolean incorrectPositionHeadingCar = true;
+		boolean incorrectCommands = true;
 		
-		/*
-		System.out.println("Enter room size: ");
-		String sizeOfTheRoom[] = scanner.nextLine().split(" ");
+		while(incorrectInputSizeRoom == true) {
+			System.out.println("Enter room size: ");
+			String sizeOfTheRoom[] = scanner.nextLine().split(" ");
 		
-		try {			
-			firstSizeRoom = Integer.parseInt(sizeOfTheRoom[0]);
-			secondSizeRoom = Integer.parseInt(sizeOfTheRoom[1]);
-		}catch(NumberFormatException numberFormatException) {
-			System.out.println("Parameters are not numbers");
-			System.exit(0);
-		}
-		catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBounds) {
-			System.out.println("Number of parameters incorrect");
-			System.exit(0);
-		}
+			try {			
+				firstSizeRoom = Integer.parseInt(sizeOfTheRoom[0]);
+				secondSizeRoom = Integer.parseInt(sizeOfTheRoom[1]);
+				incorrectInputSizeRoom = false;
+			}catch(NumberFormatException numberFormatException) {
+				System.out.println("Parameters are not numbers");
+			}catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBounds) {
+				System.out.println("Number of parameters incorrect\n");
+			}
+		} 
 		
-		System.out.println("Enter the starting position and heading of the car:");
-		String positionHeading[] = scanner.nextLine().split(" ");
+		while(incorrectPositionHeadingCar == true) {
+			System.out.println("Enter the starting position and heading of the car:");
+			String positionHeading[] = scanner.nextLine().split(" ");
 		
-		try {
+			try {			
+				initialPositionAtX = Integer.parseInt(positionHeading[0]);
+				initialPositionAtY = Integer.parseInt(positionHeading[1]);
+				initialHeading = positionHeading[2].toUpperCase();
 			
-			initialPositionAtX = Integer.parseInt(positionHeading[0]);
-			initialHeading = positionHeading[2];
-			initialPositionAtY = Integer.parseInt(positionHeading[1]);
-			
-			if(initialPositionAtX <= firstSizeRoom && 
-					initialPositionAtY <= secondSizeRoom) {
-				Car car = new Car("Monster Trucks",initialHeading,
-						initialPositionAtX,initialPositionAtX);			
-			}else {
-				System.out.println("The car is not in the room");
-				System.exit(0);				
-			}								
-		}catch(NumberFormatException numberFormatException){
-			System.out.println("Parameters are not numbers");
-			System.exit(0);
-		}catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBounds) {
-			System.out.println("Number of parameters incorrect");
-			System.exit(0);
-		}
-		
-		System.out.println("Enter the sequence of commands: ");
-		commands = scanner.nextLine();
-		for(int i = 0; i< commands.length(); i++) {
-			char letter = commands.charAt(i);
-			if(letter != 'F' && letter != 'B' && 
-					letter != 'R' && letter != 'L' ) {
-				System.out.println("One of the commands are not acceptable");
-				System.exit(0);
+				if(initialPositionAtX <= firstSizeRoom && 
+					initialPositionAtY <= secondSizeRoom) {					
+					if(initialHeading.length() == 1) {
+						if(initialHeading.equals("N") || initialHeading.equals("S") || 
+								initialHeading.equals("E") || initialHeading.equals("W")) {
+							
+							car = new Car("Monster Trucks",initialHeading,
+									initialPositionAtX,initialPositionAtY);	
+	
+							incorrectPositionHeadingCar = false;
+						}else {
+							System.out.println("The value: " + initialHeading + 
+									" is not valid as a heading");
+						}						
+					}else {
+						System.out.println("The heading must have a maximum 1 character");
+					}
+				}else {
+					System.out.println("The car is not in the room");	
+				}								
+			}catch(NumberFormatException numberFormatException){
+				System.out.println("One of the parameters are not numbers");
+			}catch(ArrayIndexOutOfBoundsException arrayIndexOutOfBounds) {
+				System.out.println("Number of parameters incorrect");
 			}
 		}
 		
-		Simulator simulator = new Simulator(firstSizeRoom,secondSizeRoom, commands);	
-		*/
+		while(incorrectCommands == true) {
+			System.out.println("Enter the sequence of commands: ");
+			commands = scanner.nextLine().toUpperCase();
+			if(commands.length() > 0) {
+				for(int i = 0; i< commands.length(); i++) {
+					char letter = commands.charAt(i);
+					if(letter != 'F' && letter != 'B' && 
+						letter != 'R' && letter != 'L' ) {
+						System.out.println("Just the commands FRLB are acceptable");
+						incorrectCommands = true;
+						break;
+					}else {
+						incorrectCommands = false;
+					}					
+				}
+			}else {
+				System.out.println("At least one command has to be enter");
+			}
+		}
+
+		Simulator simulator = new Simulator(firstSizeRoom,secondSizeRoom, commands, car);	
+		String resultOfTheSimulation = simulator.startSimulation();
+		System.out.println(resultOfTheSimulation);	
 		
-		Car car = new Car("Monster Trucks","N",2,3);
-		Simulator simulator = new Simulator(8,6,"LFFLFFF");
-		boolean resultado;
-		resultado = simulator.startSimulation(car);
-		System.out.println("Resultado: "+resultado);
-		
-		
-		
-		
+		scanner.close();		
 	}
 
 }
