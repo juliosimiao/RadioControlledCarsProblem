@@ -10,7 +10,7 @@ The simulated environment is a room. The room size is in whole meters (no decima
 
 The image below shows all possible positions in a 4 meters wide and 4 meters long room, the highlighted coordinate [0,0] is the most southwest point in which the car will fit.
 
-![Example of the room](https://files.fm/thumb_show.php?i=bemyb6je&view =150x150)
+<img src="https://files.fm/thumb_show.php?i=bemyb6je&view" width="150" alt="Example of the room">
 
 After the simulation the simulator outputs the result of the simulation. The result can either be successful (everything went ok) or unsuccessful (the car drove into the wall).
 
