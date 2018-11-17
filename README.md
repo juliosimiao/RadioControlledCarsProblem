@@ -10,4 +10,38 @@ The simulated environment is a room. The room size is in whole meters (no decima
 
 The image below shows all possible positions in a 4 meters wide and 4 meters long room, the highlighted coordinate [0,0] is the most southwest point in which the car will fit.
 
-![alt text](https://files.fm/u/a4pebtmr)
+![Example of the room](https://files.fm/thumb_show.php?i=bemyb6je&view)
+
+After the simulation the simulator outputs the result of the simulation. The result can either be successful (everything went ok) or unsuccessful (the car drove into the wall).
+
+## Running the tests
+The system will ask you the size of the room.
+  *This is inputted with two integers separated with a space.
+The system will ask you the user start position and a heading of the car.
+  *This is inputted with two integers and one letter separated with spaces. The letter can be N, S, W or E. 
+The system will ask the user about the commands to execute.
+  *This is inputted with all commands in series. Available commands are F, B, L or R.
+  
+In case of incorrect inputs the system will display an error message and you will be able to enter a new input again. The upper and lower case letter inputs are accepted.
+
+Sample input:
+```
+8 6
+2 3 N
+FFFRFFLBB
+```
+Sample output:
+```
+Unsuccessful - The car was at position: [2,5] heading to the N and tried to go Forward and hitted the wall
+```
+## Built With
+* Eclipse - The IDE for development.
+* Linux - The platform used.
+
+## Author
+
+* **Júlio Simião**
+
+
+
+
