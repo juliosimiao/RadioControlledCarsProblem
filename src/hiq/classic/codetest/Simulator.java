@@ -163,8 +163,8 @@ public class Simulator {
 			degrees -= 90;
 			this.car.setHeading(this.car.getCardinalDirections().get(degrees + ""));
 		}catch(NumberFormatException numberFormatException){
-			System.out.println("Degrees are not a valid number");
-			System.exit(0);
+			System.out.println("An error occurred");
+			numberFormatException.printStackTrace();
 		}
 	}
 	
@@ -178,8 +178,8 @@ public class Simulator {
 			degrees += 90;
 			this.car.setHeading(this.car.getCardinalDirections().get(degrees + ""));
 		}catch(NumberFormatException numberFormatException){
-			System.out.println("Degrees are not a valid number");
-			System.exit(0);
+			System.out.println("An error occurred");
+			numberFormatException.printStackTrace();
 		}
 	}
 	
@@ -199,7 +199,7 @@ public class Simulator {
 		String command = "";
 		
 		if(lastCommand == 'F') {
-			command = "Forwand";
+			command = "Forward";
 		}
 		if(lastCommand == 'B') {
 			command = "Backwards";
@@ -231,8 +231,6 @@ public class Simulator {
 
 	public void setCommands(String commands) {
 		this.commands = commands;
-	}
-	
-	
+	}	
 
 }

@@ -12,8 +12,13 @@ public class Car {
 	private int currentPositionAtX;
 	private int currentPositionAtY;
 	
-	Map<String,String> cardinalDirections = new HashMap<String,String>()
-			{{
+	private Map<String,String> cardinalDirections = new HashMap<String,String>()
+			{/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+			{
 				put("N","360");
 				put("S","180");
 				put("E","90");
@@ -28,6 +33,7 @@ public class Car {
 	
 	public Car(String carModel, String heading, int currentPositionAtX, 
 			int currentPositionAtY) {
+		
 		this.carModel = carModel;
 		this.heading = heading;
 		this.currentPositionAtX = currentPositionAtX;
@@ -94,11 +100,6 @@ public class Car {
 
 	public void setLastPositionAtY(int lastPositionAtY) {
 		this.lastPositionAtY = lastPositionAtY;
-	}		
-	
-	
-	
-	
-	
+	}	
 	
 }
